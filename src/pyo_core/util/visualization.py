@@ -24,7 +24,7 @@ class Visualizer(Visualization):
     def draw_agent(self, agent):
         if agent.x != None and agent.y != None and not agent.dead:
             radius = int(agent.size / 2)
-            pygame.draw.circle(self.surface, (0, 0, 0), [agent.x, agent.y], radius, 0)
+            pygame.draw.circle(self.surface, agent.x, agent.y, radius, (0, 0, 0))
 
     def draw_cell(self, cell):
         """
@@ -33,16 +33,25 @@ class Visualizer(Visualization):
         if cell is None:
             pass
         else:
-            if cell.altitude >= 0:
-                red = int((cell.altitude / 10) * 255)
-                green = int((cell.altitude / 10) * 255)
-                blue = 150 - int((cell.altitude / 10) * 150)
+            if cell.altitude > 10:
+                red = 255
+                green = 255
+                blue = 255
+            elif cell.altitude >= 0:
+                red = 255 - cell.altitude * 20
+                green = 255 - cell.altitude * 25
+                blue = 0
+            elif cell.altitude >= -10:
+                red = max(200 + cell.altitude * 20, 0)
+                green = max(200 + cell.altitude * 20, 0)
+                blue = min(cell.altitude * -20, 255)
             else:
-                red = 150 - int((cell.altitude / 10) * 150)
-                green = 150 - int((cell.altitude / 10) * 150)
-                blue = int((cell.altitude / 10) * 255)
+                red = 0
+                green = 0
+                blue = 100
             pygame.gfxdraw.filled_polygon(self.surface, cell.get_corners(), (red, green, blue))
             pygame.gfxdraw.aapolygon(self.surface, cell.get_corners(), (255, 255, 255))
+            # pygame.draw.aalines(self.surface, (255, 255, 255), True, cell.get_corners(), True)
 
     def highlight(self, cell):
         """

@@ -10,12 +10,13 @@ import pygame
 import numpy
 import math
 import uuid
+import random
 
 # Author Tag
 __author__ = 'Michael Wagner'
 
 # Code
-class SuperAgent(CabAgent):
+class GaiaAgent(CabAgent):
     """
     Special Agent class that handles creation and monitoring
     of the actual Pyosphere agents.
@@ -27,7 +28,8 @@ class SuperAgent(CabAgent):
         return Agent(x, y, self.gc)
 
     def perceive_and_act(self, ca, abm):
-        print("implement agent behavior here")
+        if random.random() > 0.9:
+            print('[GaiaAgent] spawning new life form')
 
         # TODO: spawn cell agents periodically
 

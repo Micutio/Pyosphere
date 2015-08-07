@@ -6,8 +6,8 @@ Uses the Complex Automaton Base.
 from cab_core.cab_system import ComplexAutomaton
 
 from pyo_core.ca.cells import PyoHexCell
-from pyo_core.abm.agents import SuperAgent
-from pyo_core.global_constants import GlobalConstants
+from pyo_core.abm.agents import GaiaAgent
+from pyo_core.global_constants import GC
 from pyo_core.util.input_handling import InputHandler
 from pyo_core.util.visualization import Visualizer
 
@@ -18,9 +18,9 @@ if __name__ == '__main__':
     
     # Creating all main assets.
 
-    gc = GlobalConstants()
+    gc = GC()
     pc = PyoHexCell(0, 0, 0, gc)
-    pa = SuperAgent(0, 0, gc)
+    pa = GaiaAgent(0, 0, gc)
     ph = InputHandler(None)
     pv = Visualizer(gc, None)
 

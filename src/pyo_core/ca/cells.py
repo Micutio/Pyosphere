@@ -17,10 +17,11 @@ __author__ = 'Michael Wagner'
 class PyoHexCell(CellHex):
     def __init__(self, x, y, c_size, c):
         super().__init__(x, y, c_size, c)
-        self.altitude = 0
+        self.altitude = ((x + y) - 20)
 
     def sense_neighborhood(self):
-        print('implement cell behavior')
+        pass
+        #print('implement cell behavior')
 
     def update(self):
         pass
