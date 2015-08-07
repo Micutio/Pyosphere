@@ -21,6 +21,11 @@ class Visualizer(Visualization):
     def clone(self, cab_sys):
         return Visualizer(self.gc, cab_sys)
 
+    def draw_agent(self, agent):
+        if agent.x != None and agent.y != None and not agent.dead:
+            radius = int(agent.size / 2)
+            pygame.draw.circle(self.surface, (0, 0, 0), [agent.x, agent.y], radius, 0)
+
     def draw_cell(self, cell):
         """
         Simple exemplary visualization. Draw cell in white.

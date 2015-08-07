@@ -40,15 +40,16 @@ class ABM:
         """
         pos = (agent.x, agent.y)
         self.agent_list.append(agent)
-        if self.gc.ONE_AGENT_PER_CELL:
-            if not pos in self.agent_locations:
-                self.agent_locations[pos] = agent
-            # Can't insert agent if cell is already occupied.
-        else:
-            if pos in self.agent_locations:
-                self.agent_locations[pos].append(agent)
+        if agent.x != None and agent.y != None:
+            if self.gc.ONE_AGENT_PER_CELL:
+                if not pos in self.agent_locations:
+                    self.agent_locations[pos] = agent
+                # Can't insert agent if cell is already occupied.
             else:
-                self.agent_locations[pos] = [agent]
+                if pos in self.agent_locations:
+                    self.agent_locations[pos].append(agent)
+                else:
+                    self.agent_locations[pos] = [agent]
 
     def remove_agent(self, agent):
         """

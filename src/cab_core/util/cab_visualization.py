@@ -30,9 +30,7 @@ class Visualization:
         """
         Simple exemplary visualization. Draw agent as a black circle
         """
-        if not agent.dead:
-            radius = int(agent.size / 2)
-            pygame.draw.circle(self.surface, (0, 0, 0), [agent.x, agent.y], radius, 0)
+        raise NotImplementedError("Method needs to be implemented")
 
     def draw_cell(self, cell):
         """

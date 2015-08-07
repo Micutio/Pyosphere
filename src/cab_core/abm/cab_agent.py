@@ -7,7 +7,7 @@ __author__ = 'Michael Wagner'
 import uuid
 
 
-class Agent:
+class CabAgent:
     """
     Parent class for all agents.
     Every subclass has to implement the perceive_and_act() method.
@@ -23,7 +23,7 @@ class Agent:
         self.dead = False
 
     def clone(self, x, y):
-        return Agent(x, y, self.gc)
+        return CabAgent(x, y, self.gc)
 
     def perceive_and_act(self, ca, abm):
         raise NotImplementedError("Method needs to be implemented")
