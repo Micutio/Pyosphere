@@ -28,6 +28,7 @@ class GC(GlobalConstants):
         ################################
         #         CA CONSTANTS         #
         ################################
+        self.USE_HEX_CA = True
         self.USE_MOORE_NEIGHBORHOOD = True
         self.USE_CA_BORDERS = True
         self.DIM_X = 50  # How many cells is the ca wide?
@@ -49,9 +50,9 @@ class GolCell(CellHex):
         self.alive = 0
         self.next_state = 0
         # The rules:
-        #   cell will be [b]orn if #alive_neighbors is in self.b
+        #   cell will be [b]orn if it has the following amount of neighbors
         self.b = [2]
-        #   cell will [s]tay alive if #alive_neighbors is in self.s
+        #   cell will [s]tay alive if it has the following amount of neighbors
         self.s = [3, 4]
 
     def sense_neighborhood(self):
@@ -122,16 +123,16 @@ class GolVis(Visualization):
             pass
         else:
             if cell.is_border:
-                pygame.gfxdraw.filled_polygon(self.surface, cell.get_corners(), (190, 190, 190))
+                pygame.gfxdraw.filled_polygon(self.surface, cell.get_corners(), (120, 120, 120))
             else:
                 if cell.alive:
-                    red = 0
-                    green = 0
-                    blue = 0
+                    red = 90
+                    green = 90
+                    blue = 90
                 else:
-                    red = 255
-                    green = 255
-                    blue = 255
+                    red = 220
+                    green = 220
+                    blue = 220
                 pygame.gfxdraw.filled_polygon(self.surface, cell.get_corners(), (red, green, blue))
                 pygame.gfxdraw.aapolygon(self.surface, cell.get_corners(), (190, 190, 190))
 

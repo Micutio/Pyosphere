@@ -10,6 +10,7 @@ import pygame
 import math
 
 from cab_core.abm.cab_abm import ABM
+from cab_core.ca.cab_ca import CARect
 from cab_core.ca.cab_ca_hex import CAHex
 from cab_core.util.cab_input_handling import InputHandler
 from cab_core.util.cab_visualization import Visualization
@@ -30,10 +31,15 @@ class ComplexAutomaton:
 
         pygame.init()
         # pygame.display.init()
-        offset_x = int((math.sqrt(3) / 2) * (self.gc.CELL_SIZE * 2) * (self.gc.DIM_X - 1))
-        offset_y = int((3 / 4) * (self.gc.CELL_SIZE * 2) * (self.gc.DIM_Y - 1))
-        # print(offset)
-        # self.screen = pygame.display.set_mode((self.gc.GRID_WIDTH, self.gc.GRID_HEIGHT), pygame.RESIZABLE, 32)
+        if self.gc.USE_HEX_CA:
+            offset_x = int((math.sqrt(3) / 2) * (self.gc.CELL_SIZE * 2) * (self.gc.DIM_X - 1))
+            offset_y = int((3 / 4) * (self.gc.CELL_SIZE * 2) * (self.gc.DIM_Y - 1))
+            # print(offset)
+            # self.screen = pygame.display.set_mode((self.gc.GRID_WIDTH, self.gc.GRID_HEIGHT), pygame.RESIZABLE, 32)
+        else:
+            offset_x = self.gc.CELL_SIZE * self.gc.DIM_X
+            offset_y = self.gc.CELL_SIZE * self.gc.DIM_Y
+
         self.screen = pygame.display.set_mode((offset_x, offset_y), HWSURFACE|DOUBLEBUF, 32)
         pygame.display.set_caption('Complex Automaton Base')
 
@@ -48,10 +54,16 @@ class ComplexAutomaton:
             self.visualizer = Visualization(self.gc, self.screen)
 
         if 'proto_cell' in kwargs:
-            self.ca = CAHex(self.gc, self.visualizer, proto_cell=kwargs['proto_cell'])
+            if self.gc.USE_HEX_CA:
+                self.ca = CAHex(self.gc, self.visualizer, proto_cell=kwargs['proto_cell'])
+            else:
+                self.ca = CARect(self.gc, self.visualizer, proto_cell=kwargs['proto_cell'])
             self.proto_cell = kwargs['proto_cell']
         else:
-            self.ca = CAHex(self.gc, self.visualizer)
+            if self.gc.USE_HEX_CA:
+                self.ca = CAHex(self.gc, self.visualizer)
+            else:
+                self.ca = CARect(self.gc, self.visualizer)
             self.proto_cell = None
 
         if 'proto_agent' in kwargs:

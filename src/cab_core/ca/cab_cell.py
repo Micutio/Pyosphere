@@ -40,7 +40,13 @@ class CellRect(CACell):
         self.w = c_size
         self.h = c_size
         
-    # TODO: def get_corners(self):
+    def get_corners(self):
+        corners = []
+        corners.append((self.x * self.w, self.y * self.h))
+        corners.append((self.x * self.w + self.w, self.y * self.h))
+        corners.append((self.x * self.w + self.w, self.y * self.h + self.h))
+        corners.append((self.x * self.w, self.y * self.h + self.h))
+        return corners
 
 class CellHex(CACell):
     """

@@ -17,7 +17,7 @@ class GlobalConstants:
         ################################
         #         CA CONSTANTS         #
         ################################
-        # self.USE_HEX_CA = True
+        self.USE_HEX_CA = False
         self.USE_CA_BORDERS = True
         self.DIM_X = 50  # How many cells is the ca wide?
         self.DIM_Y = 50  # How many cells is the ca high?

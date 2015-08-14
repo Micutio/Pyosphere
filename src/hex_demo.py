@@ -2,11 +2,11 @@
 Main module of the Flow and Pressure Demo.
 Uses the Complex Automaton Base.
 """
-from ca.cab_cell import CellHex
-from cab_global_constants import GlobalConstants
-from cab_system import ComplexAutomaton
-from util.cab_input_handling import InputHandler
-from util.cab_visualization import Visualization
+from cab_core.ca.cab_cell import CellHex
+from cab_core.cab_global_constants import GlobalConstants
+from cab_core.cab_system import ComplexAutomaton
+from cab_core.util.cab_input_handling import InputHandler
+from cab_core.util.cab_visualization import Visualization
 
 import pygame
 import numpy

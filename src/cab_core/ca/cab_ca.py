@@ -5,7 +5,7 @@ Moore and von-Neumann neighborhoods are available.
 
 __author__ = 'Michael Wagner'
 
-from cab_cell import CellRect
+from cab_core.ca.cab_cell import CellRect
 
 
 class CARect:
