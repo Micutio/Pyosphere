@@ -55,7 +55,7 @@ class CAHex:
                         self.ca_grid[q, j].is_border = True
 
         for cell in list(self.ca_grid.values()):
-            self.set_neighborhood(cell)
+            self.set_cell_neighborhood(cell)
 
     # Common Interface for all CA classes
 
@@ -85,16 +85,18 @@ class CAHex:
         for cell in self.ca_grid.values():
             cell.update()
 
-    def get_agent_neighborhood(self, a_pos, agent_x, agent_y):
+    def get_agent_neighborhood(self, a_pos, agent_x, agent_y, dist):
         """
         Creates a dictionary {'position': (cell, [agents on that cell])}
         for the calling agent to get an overview over its immediate surrounding.
         """
+        if dist == None:
+            dist = 1
         x = int(agent_x / self.cell_size)
         y = int(agent_y / self.cell_size)
         neighborhood = {}
-        for i in range(-1, 2):
-            for j in range(-1, 2):
+        for i in range(0 - dist, 1 + dist):
+            for j in range(0 - dist, 1 + dist):
                 grid_x = x + i
                 grid_y = y + j
                 if (grid_x, grid_y) in self.ca_grid and not (grid_x == 0 and grid_y == 0):
@@ -108,7 +110,7 @@ class CAHex:
 
     # Individual methods for this specific CA
 
-    def set_neighborhood(self, cell):
+    def set_cell_neighborhood(self, cell):
         cx, cy, cz = cell.get_cube()
         for d in self.gc.HEX_DIRECTIONS:
             x = cx + d[0]

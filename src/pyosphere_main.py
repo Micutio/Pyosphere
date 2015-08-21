@@ -5,7 +5,7 @@ Uses the Complex Automaton Base.
 
 from cab_core.cab_system import ComplexAutomaton
 
-from pyo_core.ca.cells import PyoHexCell
+from pyo_core.ca.cells import PyoHexCell, TerrainGenerator
 from pyo_core.abm.agents import GaiaAgent
 from pyo_core.global_constants import GC
 from pyo_core.util.input_handling import InputHandler
@@ -23,6 +23,9 @@ if __name__ == '__main__':
     pa = GaiaAgent(0, 0, gc)
     ph = InputHandler(None)
     pv = Visualizer(gc, None)
+
+    tg = TerrainGenerator(gc.DIM_X, gc.DIM_Y)
+    pc.set_terrain_gen(tg)
 
     # Use assets to initialize simulation system.
 

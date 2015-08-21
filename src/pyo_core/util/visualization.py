@@ -42,9 +42,10 @@ class Visualizer(Visualization):
                 green = 255 - cell.altitude * 25
                 blue = 0
             elif cell.altitude >= -10:
-                red = max(200 + cell.altitude * 20, 0)
-                green = max(200 + cell.altitude * 20, 0)
-                blue = min(cell.altitude * -20, 255)
+                red = max(220 + cell.altitude * 25, 0)
+                green = max(230 + cell.altitude * 20, 0)
+                blue = max(250 + cell.altitude * 20, 0)
+                # blue = min(cell.altitude * -25, 255)
             else:
                 red = 0
                 green = 0

@@ -23,6 +23,16 @@ class GaiaAgent(CabAgent):
     """
     def __init__(self, x, y, gc):
         super().__init__(None, None, gc)
+        self.genome = []
+        # inherited agent fields:
+        #   self.a_id = uuid.uuid4().urn
+        #   self.x = x
+        #   self.y = y
+        #   self.prev_x = x
+        #   self.prev_y = y
+        #   self.size = gc.CELL_SIZE
+        #   self.gc = gc
+        #   self.dead = False
 
     def clone(self, x, y):
         return Agent(x, y, self.gc)
