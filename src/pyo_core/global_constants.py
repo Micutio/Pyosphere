@@ -16,7 +16,8 @@ __author__ = 'Michael Wagner'
 class GC(GlobalConstants):
     def __init__(self):
         super().__init__()
-        self.VERSION = 'version: 09-2014'
+        self.VERSION = 'version: 09-2015'
+        self.TITLE = 'Pyosphere'
         ################################
         #     SIMULATION CONSTANTS     #
         ################################

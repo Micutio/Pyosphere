@@ -42,13 +42,14 @@ class TerrainGenerator():
     def __init__(self, x_dim, y_dim):
         self.x_dim = x_dim * 2
         self.y_dim = y_dim * 2
-        self.highest = 35
-        self.deepest = -30
-        self.slope = 0.7
+        self.highest = 45
+        self.deepest = -25
+        self.slope = 1.0
         self.smoothness = 8
         self.water_level = 0
         self.landscape = None
-        self.landscape = self.get_island_landscape()
+        # self.landscape = self.get_island_landscape()
+        self.landscape = self.get_coastal_landscape()
 
     def get(self, x, y):
         offset_x = int(self.x_dim / 2)
@@ -62,8 +63,7 @@ class TerrainGenerator():
             for i in range(self.x_dim):
                 # l1[i][j] = int(random.triangular(self.deepest, self.highest, 5))s
                 mode = (((i + j) / 200) * 20) - 15
-                print(mode)
-                l1[i][j] = int(random.triangular(self.deepest + 2*mode, self.highest + 2*mode, mode))
+                l1[i][j] = int(random.triangular(self.deepest + 2 * mode, self.highest + 2 * mode, mode))
 
         for _ in range(self.smoothness):
             for j in range(self.y_dim):

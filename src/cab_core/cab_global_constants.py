@@ -8,6 +8,7 @@ __author__ = 'Michael Wagner'
 class GlobalConstants:
     def __init__(self):
         self.VERSION = "version: 09-2014"
+        self.TITLE = "TITLE"
         ################################
         #     SIMULATION CONSTANTS     #
         ################################

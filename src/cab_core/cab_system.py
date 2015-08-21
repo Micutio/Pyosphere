@@ -82,16 +82,14 @@ class ComplexAutomaton:
         return
 
     def display_info(self):
-        print("\n-------------------------[Complex Automaton Base]------------------------------"
-              "\n > %s"
-              "\n-------------------------------------------------------------------------------"
-              "\n [COMMANDS]------------------------------------------------------------------- "
-              "\n  [SIMULATION CONTROL]-------------------------------------------------------  "
-              "\n   > [SPACE] pause/resume simulation                                           "
-              "\n   > [S] step simulation                                                       "
-              "\n   > [R] reset simulation                                                      "
-              "\n  ---------------------------------------------------------------------------  "
-              "\n {0}".format(self.gc.VERSION))
+        print( "\n > running {0} \n"
+               "\n {1} \n"
+               "\n keys:"
+               "\n        [SPACE] pause/resume simulation"
+               "\n          [S]   step simulation        "
+               "\n          [R]   reset simulation       "
+               "\n ".format(self.gc.TITLE, self.gc.VERSION))
+
 
     def reset_simulation(self):
         self.ca.__init__(self.gc, self.visualizer, self.proto_cell)
@@ -110,10 +108,10 @@ class ComplexAutomaton:
 
     def run_main_loop(self):
         """
-        Main method. It executes the CA.64
+        Main method. It executes the CA.
         """
-        print("------------------------------[SIMULATION LOG]---------------------------------")
-        print("                                                                               ")
+        print("simulation log:")
+        print()
         while True:
             if self.gc.RUN_SIMULATION:
                 self.step_simulation()
