@@ -42,22 +42,30 @@ class TerrainGenerator():
     def __init__(self, x_dim, y_dim):
         self.x_dim = x_dim * 2
         self.y_dim = y_dim * 2
+        self.highest = 35
+        self.deepest = -30
+        self.slope = 0.7
+        self.smoothness = 8
+        self.water_level = 0
         self.landscape = None
-        self.landscape = self.get_procedural_landscape_v1()
+        self.landscape = self.get_island_landscape()
 
     def get(self, x, y):
         offset_x = int(self.x_dim / 2)
         offset_y = int(self.y_dim / 2)
         return self.landscape[x + offset_x][y + offset_y]
 
-    def get_procedural_landscape_v1(self):
+    def get_coastal_landscape(self):
         l1 = [[0 for _ in range(self.y_dim)] for _ in range(self.x_dim)]
         l2 = [[0 for _ in range(self.y_dim)] for _ in range(self.x_dim)]
         for j in range(self.y_dim):
             for i in range(self.x_dim):
-                l1[i][j] = int(random.triangular(-20, 20, -10))
+                # l1[i][j] = int(random.triangular(self.deepest, self.highest, 5))s
+                mode = (((i + j) / 200) * 20) - 15
+                print(mode)
+                l1[i][j] = int(random.triangular(self.deepest + 2*mode, self.highest + 2*mode, mode))
 
-        for _ in range(1):
+        for _ in range(self.smoothness):
             for j in range(self.y_dim):
                 for i in range(self.x_dim):
                     n = 0
@@ -71,18 +79,25 @@ class TerrainGenerator():
                                 except IndexError:
                                     pass
                     avg = f / n
-                    l2[i][j] = int(avg)
+                    if avg > l1[i][j]:
+                        diff = avg - l1[i][j]
+                        l2[i][j] = l1[i][j] + (diff * self.slope)
+                    elif avg < l1[i][j]:
+                        diff = l1[i][j] - avg
+                        l2[i][j] = l1[i][j] - (diff * self.slope)
+                    else:
+                        l2[i][j] = l1[i][j]
             l1, l2 = l2, l1
         return l1
 
-    def get_procedural_landscape_v2(self):
+    def get_island_landscape(self):
         l1 = [[0 for _ in range(self.y_dim)] for _ in range(self.x_dim)]
         l2 = [[0 for _ in range(self.y_dim)] for _ in range(self.x_dim)]
         for j in range(self.y_dim):
             for i in range(self.x_dim):
-                l1[i][j] = int(random.triangular(-20, 20, -15))
+                l1[i][j] = int(random.triangular(self.deepest, self.highest, self.water_level))
 
-        for _ in range(1):
+        for _ in range(self.smoothness):
             for j in range(self.y_dim):
                 for i in range(self.x_dim):
                     n = 0
@@ -96,12 +111,13 @@ class TerrainGenerator():
                                 except IndexError:
                                     pass
                     avg = f / n
-                    if random.random() > 0.5:
-                        if l1[i][j] > avg:
-                            l2[i][j] = l1[i][j] - 1
-                        elif l1[i][j] < avg:
-                            l2[i][j] = l1[i][j] + 1
+                    if avg > l1[i][j]:
+                        diff = avg - l1[i][j]
+                        l2[i][j] = l1[i][j] + (diff * self.slope)
+                    elif avg < l1[i][j]:
+                        diff = l1[i][j] - avg
+                        l2[i][j] = l1[i][j] - (diff * self.slope)
                     else:
-                        l2[i][j] = int(avg)
+                        l2[i][j] = l1[i][j]
             l1, l2 = l2, l1
         return l1
