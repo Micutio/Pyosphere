@@ -18,8 +18,12 @@ __author__ = 'Michael Wagner'
 class PyoHexCell(CellHex):
     def __init__(self, x, y, c_size, c):
         super().__init__(x, y, c_size, c)
-        self.altitude = ((x + y) - 20)
+        self.altitude = 0
+        self.air = 0
+        self.water = 0
+        self.light = 0
         self.t_gen = None
+        
 
     def sense_neighborhood(self):
         pass
@@ -28,6 +32,14 @@ class PyoHexCell(CellHex):
     def set_terrain_gen(self, tg):
         self.t_gen = tg
         self.altitude = self.t_gen.get(self.x, self.y)
+        if self.altitude >= 0:
+            self.air = max(10 - self.altitude, 0)
+            self.water = max(6 - self.altitude, 0)
+            self.light = min(self.altitude + 5, 10)
+        else:
+            self.air = 0
+            self.water = 10
+            self.light = max(self.altitude + 5, 0)
 
     def update(self):
         pass

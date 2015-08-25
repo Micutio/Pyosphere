@@ -82,8 +82,7 @@ class ComplexAutomaton:
         return
 
     def display_info(self):
-        print( "\n > running {0} \n"
-               "\n {1} \n"
+        print( "\n {0}, version {1}"
                "\n keys:"
                "\n        [SPACE] pause/resume simulation"
                "\n          [S]   step simulation        "

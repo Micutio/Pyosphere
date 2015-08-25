@@ -38,7 +38,7 @@ class CAHex:
             for j in range(0, self.height):
                 for i in range(0, self.width):
                     # self.ca_grid[i, j] = CellHex(i, j, gc.CELL_SIZE, gc)
-                    q = i-math.floor(j/2)
+                    q = i - math.floor(j / 2)
                     self.ca_grid[q, j] = CellHex(q, j, gc.CELL_SIZE, gc)
                     # print('x={0}, y={1}'.format(q, j))
                     if self.gc.USE_CA_BORDERS and (i == 0 or j == 0 or i == (self.width - 1) or j == (self.height - 1)):
@@ -48,7 +48,7 @@ class CAHex:
             for j in range(0, self.height):
                 for i in range(0, self.width):
                     # self.ca_grid[i, j] = proto_cell.clone(i, j, gc.CELL_SIZE)
-                    q = i-math.floor(j/2)
+                    q = i - math.floor(j / 2)
                     self.ca_grid[q, j] = proto_cell.clone(q, j, gc.CELL_SIZE)
                     # print('x={0}, y={1}'.format(q, j))
                     if self.gc.USE_CA_BORDERS and (i == 0 or j == 0 or i == (self.width - 1) or j == (self.height - 1)):
@@ -85,7 +85,7 @@ class CAHex:
         for cell in self.ca_grid.values():
             cell.update()
 
-    def get_agent_neighborhood(self, a_pos, agent_x, agent_y, dist):
+    def get_agent_neighborhood(self, other_agents, agent_x, agent_y, dist):
         """
         Creates a dictionary {'position': (cell, [agents on that cell])}
         for the calling agent to get an overview over its immediate surrounding.
@@ -101,10 +101,10 @@ class CAHex:
                 grid_y = y + j
                 if (grid_x, grid_y) in self.ca_grid and not (grid_x == 0 and grid_y == 0):
                     a = self.ca_grid[grid_x, grid_y]
-                    if (grid_x, grid_y) not in a_pos:
+                    if (grid_x, grid_y) not in other_agents:
                         b = False
                     else:
-                        b = a_pos[grid_x, grid_y]
+                        b = other_agents[grid_x, grid_y]
                     neighborhood[grid_x, grid_y] = (a, b)
         return neighborhood
 

@@ -40,3 +40,5 @@ class GC(GlobalConstants):
         ################################
         #      UTILITY CONSTANTS       #
         ################################
+        self.VIS_CELL_OPTIONS = ["altitude", "air", "water", "light", "value"]
+        self.VIS_CELL_CURRENT = "altitude"

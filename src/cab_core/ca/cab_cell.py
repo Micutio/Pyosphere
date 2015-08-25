@@ -64,15 +64,19 @@ class CellHex(CACell):
         self.z = -self.q - self.r
         self.rectangular = False
         self.c_size = c_size
-        
+
+        self.corners = []
+        self.corners = self.get_corners()
 
     def get_corners(self):
         corners = []
         for i in range(6):
             angle = 2 * math.pi / 6 * (i + 0.5)
+            
             x = (self.x * self.horiz) + self.c_size * math.cos(angle)
-            y = (self.y * self.vert) + self.c_size * math.sin(angle)
             offset = self.y * (self.horiz / 2)
+
+            y = (self.y * self.vert) + self.c_size * math.sin(angle)
             # offset = 1
             # print('x = {0}, y = {1}, offset = {2}'.format(x, y, offset))
             # corners.append((x + offset, y))
