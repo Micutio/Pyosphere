@@ -10,6 +10,7 @@ import pygame
 import numpy
 import math
 import random
+random.seed("ABCD")
 
 # Author Tag
 __author__ = 'Michael Wagner'

@@ -56,7 +56,8 @@ class PyoAgent(CabAgent):
     def __init__(self, x, y, gc, gene_string):
         super().__init__(x, y, gc)
         self.genome = gene_string
-
+        self.cells = {}
+        self.energy = 0
 
     def perceive_and_act(self, ca, abm):
         # print("implement plant agent behavior here")
@@ -66,5 +67,14 @@ class PyoAgent(CabAgent):
         # int = int(string, 2)
         # bit 0,1 : type of cell
         # bit 2 .. 5 : efficiency or preferred value?
-        pass
-
+        # Idea: make energy consumption dependent on total number of cells
+        # Idea: multiplicator if food gathered from multiple different resources
+        for i in range(0, len(self.genome), 100):
+            chunk = self.genome[i:i + 6]
+            cell_type = int(chunk[:2], 2)
+            efficiency = int(chunk[2:6], 2)
+            if cell_type in self.cells:
+                self.cells[cell_type].append(efficiency)
+            else:
+                self.cells[cell_type] = [efficiency]
+        # Use print(''.join(random.choice('0', '1') for i in range(x * 6)))
