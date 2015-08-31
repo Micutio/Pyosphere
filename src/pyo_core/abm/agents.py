@@ -58,10 +58,29 @@ class PyoAgent(CabAgent):
         self.genome = gene_string
         self.cells = {}
         self.energy = 0
+        self.age = 0
 
     def perceive_and_act(self, ca, abm):
         # print("implement plant agent behavior here")
-        pass
+        if not self.dead:
+            if self.age == 100:
+                self.dead = True
+            else:
+                self.age += 1
+                self.energy += self.gain_from_cell(ca.ca_grid[self.x, self.y])
+                # if energy high enough, spawn offspring in [most fitting/random] neighboring cell
+                # determine how much energy is given to the offspring
+                # and how much used by self every turn.
+
+    def gain_from_cell(self, cell):
+        total_gain = 0
+        for c in self.cells[0]:
+            total_gain += cell.air * c
+        for c in self.cells[1]:
+            total_gain += cell.water * c
+        for c in self.cells[2]:
+            total_gain += cell.light * c
+        return total_gain
 
     def decode_genes(self):
         # int = int(string, 2)
