@@ -10,7 +10,7 @@ import pygame
 import numpy
 import math
 import random
-random.seed("ABCD")
+# random.seed("FOOBAR")
 
 # Author Tag
 __author__ = 'Michael Wagner'
@@ -35,12 +35,12 @@ class PyoHexCell(CellHex):
         self.altitude = self.t_gen.get(self.x, self.y)
         if self.altitude >= 0:
             self.air = max(10 - self.altitude, 0)
-            self.water = max(6 - self.altitude, 0)
-            self.light = min(self.altitude + 5, 10)
+            self.water = 0 #max(6 - self.altitude, 0)
+            self.light = min(self.altitude, 10)
         else:
             self.air = 0
             self.water = 10
-            self.light = max(self.altitude + 5, 0)
+            self.light = max(self.altitude + 3, 0)
 
     def update(self):
         pass
@@ -58,7 +58,7 @@ class TerrainGenerator():
         self.highest = 45
         self.deepest = -25
         self.slope = 1.0
-        self.smoothness = 8
+        self.smoothness = 2
         self.water_level = 0
         self.landscape = None
         # self.landscape = self.get_island_landscape()
