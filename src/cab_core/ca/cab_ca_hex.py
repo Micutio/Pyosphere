@@ -87,13 +87,15 @@ class CAHex:
 
     def get_agent_neighborhood(self, other_agents, agent_x, agent_y, dist):
         """
-        Creates a dictionary {'position': (cell, [agents on that cell])}
+        Creates a dictionary {'position': (cell, [agents on that cell])} where position is an (x,y) tuple
         for the calling agent to get an overview over its immediate surrounding.
         """
         if dist == None:
             dist = 1
-        x = int(agent_x / self.cell_size)
-        y = int(agent_y / self.cell_size)
+        # x = int(agent_x / self.cell_size)
+        # y = int(agent_y / self.cell_size)
+        x = agent_x
+        y = agent_y
         neighborhood = {}
         for i in range(0 - dist, 1 + dist):
             for j in range(0 - dist, 1 + dist):
@@ -106,6 +108,31 @@ class CAHex:
                     else:
                         b = other_agents[grid_x, grid_y]
                     neighborhood[grid_x, grid_y] = (a, b)
+        return neighborhood
+
+    def get_empty_agent_neighborhood(self, other_agents, agent_x, agent_y, dist):
+        """
+        Creates a dictionary {'position': cell} where position is an (x,y) tuple
+        for the calling agent to get an overview over its immediate surrounding.
+        """
+        if dist == None:
+            dist = 1
+        # x = int(agent_x / self.cell_size)
+        # y = int(agent_y / self.cell_size)
+        x = agent_x
+        y = agent_y
+        neighborhood = {}
+        for i in range(0 - dist, 1 + dist):
+            for j in range(0 - dist, 1 + dist):
+                grid_x = x + i
+                grid_y = y + j
+                if (grid_x, grid_y) in self.ca_grid and not (grid_x == 0 and grid_y == 0):
+                    a = self.ca_grid[grid_x, grid_y]
+                    if (grid_x, grid_y) not in other_agents:
+                        neighborhood[grid_x, grid_y] = a
+                    else:
+                        continue
+                    
         return neighborhood
 
     # Individual methods for this specific CA
