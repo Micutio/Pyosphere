@@ -48,7 +48,7 @@ class GaiaAgent(CabAgent):
             q = x - math.floor(y / 2)
             genome = ''.join(random.choice(('0', '1')) for _ in range(6))
             abm.add_agent(PyoAgent(q, y, self.gc, genome))
-            print('[GaiaAgent] spawning new life form in ({0}, {1}) with genome: {2}'.format(q, y, genome))
+            # print('[GaiaAgent] spawning new life form in ({0}, {1}) with genome: {2}'.format(q, y, genome))
             # TODO: spawn cell agents periodically
 
 
@@ -119,7 +119,7 @@ class PyoAgent(CabAgent):
             chunk = self.genome[i:i + 6]
             cell_type = int(chunk[:2], 2)
             efficiency = int(chunk[2:6], 2) / 16
-            print('cell_type: {0}, efficiency: {1}'.format(cell_type, efficiency))
+            # print('cell_type: {0}, efficiency: {1}'.format(cell_type, efficiency))
             if cell_type in self.cells:
                 self.cells[cell_type].append(efficiency)
             else:
@@ -131,14 +131,14 @@ class PyoAgent(CabAgent):
         # With very small likelihood, the genome will be doubled
         if random.random() < 0.001:
             result = result + result
-            print('duplication occurred')
+            print('duplication occurred: {0}'.format(result))
         # With certain likelihood, a bit in the genome will be flipped
         elif random.random() < 0.1:
             index = random.choice(range(len(self.genome)))
             l = list(result)
             l[index] = str(1 - int(l[index]))
             result = ''.join(l)
-            print('mutation occurred')
+            # print('mutation occurred')
 
         return result
 
@@ -152,6 +152,6 @@ class PyoAgent(CabAgent):
         #         pos = key
         if len(list(neigh_cells.keys())) > 0:
             pos = random.choice(list(neigh_cells.keys()))
-        if pos != None:
+        if pos != None and pos in ca.ca_grid:
             abm.add_agent(PyoAgent(pos[0], pos[1], self.gc, self.mutate_genes()))
             # print('spawned new plant at ({0}, {1})'.format(pos[0], pos[1]))

@@ -55,14 +55,14 @@ class TerrainGenerator():
     def __init__(self, x_dim, y_dim):
         self.x_dim = x_dim * 2
         self.y_dim = y_dim * 2
-        self.highest = 45
-        self.deepest = -25
+        self.highest = 20
+        self.deepest = -20
         self.slope = 1.0
         self.smoothness = 2
-        self.water_level = 0
+        self.water_level = -5
         self.landscape = None
-        # self.landscape = self.get_island_landscape()
-        self.landscape = self.get_coastal_landscape()
+        self.landscape = self.get_island_landscape()
+        # self.landscape = self.get_coastal_landscape()
 
     def get(self, x, y):
         offset_x = int(self.x_dim / 2)
