@@ -59,9 +59,11 @@ class TerrainGenerator():
         self.deepest = -20
         self.slope = 1.0
         self.smoothness = 2
-        self.water_level = -5
+        self.water_level = 0
         self.landscape = None
+        self.factor = 10
         self.landscape = self.get_island_landscape()
+        
         # self.landscape = self.get_coastal_landscape()
 
     def get(self, x, y):
@@ -106,9 +108,15 @@ class TerrainGenerator():
     def get_island_landscape(self):
         l1 = [[0 for _ in range(self.y_dim)] for _ in range(self.x_dim)]
         l2 = [[0 for _ in range(self.y_dim)] for _ in range(self.x_dim)]
+        lower_limit  = int((self.y_dim + self.x_dim) * 0.33)
+        upper_limit  = int((self.y_dim + self.x_dim) * 0.9)
+        print(lower_limit, upper_limit)
+        last_rand = 0
         for j in range(self.y_dim):
             for i in range(self.x_dim):
-                l1[i][j] = int(random.triangular(self.deepest, self.highest, self.water_level))
+                if (i + j) % self.factor == 0:
+                    last_rand = int(random.triangular(self.deepest, self.highest, self.water_level))
+                l1[i][j] = last_rand
 
         for _ in range(self.smoothness):
             for j in range(self.y_dim):
