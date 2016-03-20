@@ -3,8 +3,8 @@ Module Description
 """
 
 # Imports
-from cab_core.cab_global_constants import GlobalConstants
-from cab_core.ca.cab_ca_hex import CellHex
+from cab.cab_global_constants import GlobalConstants
+from cab.ca.cab_ca_hex import CellHex
 
 import pygame
 import numpy

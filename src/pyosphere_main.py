@@ -3,7 +3,7 @@ Main module of the Flow and Pressure Demo.
 Uses the Complex Automaton Base.
 """
 
-from cab_core.cab_system import ComplexAutomaton
+from cab.cab_system import ComplexAutomaton
 
 from pyo_core.ca.cells import PyoHexCell, TerrainGenerator
 from pyo_core.abm.agents import GaiaAgent

@@ -3,8 +3,8 @@ Module Description
 """
 
 # Imports
-from cab_core.cab_global_constants import GlobalConstants
-from cab_core.abm.cab_agent import CabAgent
+from cab.cab_global_constants import GlobalConstants
+from cab.abm.cab_agent import CabAgent
 
 import pygame
 import numpy
