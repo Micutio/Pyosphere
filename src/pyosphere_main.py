@@ -19,10 +19,10 @@ if __name__ == '__main__':
     # Creating all main assets.
 
     gc = GC()
-    pc = PyoHexCell(0, 0, 0, gc)
+    pc = PyoHexCell(0, 0, gc)
     pa = GaiaAgent(0, 0, gc)
     ph = InputHandler(None)
-    pv = Visualizer(gc, None)
+    pv = Visualizer(gc, None, None)
 
     tg = TerrainGenerator(gc.DIM_X, gc.DIM_Y)
     pc.set_terrain_gen(tg)

@@ -15,11 +15,11 @@ __author__ = 'Michael Wagner'
 
 # Code
 class Visualizer(Visualization):
-    def __init__(self, gc, screen):
-        super().__init__(gc, screen)
+    def __init__(self, gc, screen, sys):
+        super().__init__(gc, screen, sys)
 
-    def clone(self, cab_sys):
-        return Visualizer(self.gc, cab_sys)
+    def clone(self, gc, surface, cab_sys):
+        return Visualizer(gc, surface, cab_sys)
 
     def draw_agent(self, agent):
         # print(agent.x, agent.y)

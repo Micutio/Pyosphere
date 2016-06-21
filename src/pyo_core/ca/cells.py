@@ -17,8 +17,8 @@ __author__ = 'Michael Wagner'
 
 # Code
 class PyoHexCell(CellHex):
-    def __init__(self, x, y, c_size, c):
-        super().__init__(x, y, c_size, c)
+    def __init__(self, x, y, c):
+        super().__init__(x, y, c)
         self.altitude = 0
         self.air = 0
         self.water = 0
@@ -45,8 +45,8 @@ class PyoHexCell(CellHex):
     def update(self):
         pass
 
-    def clone(self, x, y, c_size):
-        pc = PyoHexCell(x, y, c_size, self.gc)
+    def clone(self, x, y, gc):
+        pc = PyoHexCell(x, y, gc)
         pc.set_terrain_gen(self.t_gen)
         return pc
 
